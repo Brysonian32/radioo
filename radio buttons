@@ -1,0 +1,70 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class PetChooser {
+    private JFrame frame;
+    private ButtonGroup petGroup;
+    private JLabel petLabel;
+
+    public PetChooser() {
+        createGUI();
+    }
+
+    private void createGUI() {
+        frame = new JFrame("Pet Chooser");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout());
+
+        petLabel = new JLabel("Choose a pet:");
+        frame.add(petLabel);
+
+        petGroup = new ButtonGroup();
+
+        JRadioButton dogButton = new JRadioButton("Dog");
+        dogButton.addActionListener(new PetListener());
+        petGroup.add(dogButton);
+        frame.add(dogButton);
+
+        JRadioButton catButton = new JRadioButton("Cat");
+        catButton.addActionListener(new PetListener());
+        petGroup.add(catButton);
+        frame.add(catButton);
+
+        JRadioButton birdButton = new JRadioButton("Bird");
+        birdButton.addActionListener(new PetListener());
+        petGroup.add(birdButton);
+        frame.add(birdButton);
+
+        JRadioButton fishButton = new JRadioButton("Fish");
+        fishButton.addActionListener(new PetListener());
+        petGroup.add(fishButton);
+        frame.add(fishButton);
+
+        JRadioButton hamsterButton = new JRadioButton("Hamster");
+        hamsterButton.addActionListener(new PetListener());
+        petGroup.add(hamsterButton);
+        frame.add(hamsterButton);
+
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    private class PetListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JRadioButton button = (JRadioButton) e.getSource();
+            String pet = button.getText();
+            petLabel.setText("You chose a " + pet + "!");
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new PetChooser();
+            }
+        });
+    }
+}
